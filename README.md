@@ -1,1 +1,1 @@
-# samrt edu
+# smart edu
