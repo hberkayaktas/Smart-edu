@@ -18,9 +18,9 @@ exports.createCourse = async (req, res) => {
 exports.getAllCourses = async (req, res) => {
   try {
     const courses = await Course.find();
-    res.status(200).render('courses',{
+    res.status(200).render("courses", {
       courses,
-      page_name:'courses',
+      page_name: "courses",
     });
   } catch (error) {
     res.status(400).json({
@@ -31,16 +31,16 @@ exports.getAllCourses = async (req, res) => {
 };
 
 exports.getCourse = async (req, res) => {
-      try {
-        const course = await Course.findById({_id:req.params.id});
-        res.status(200).render('course',{
-          course,
-          page_name:'courses',
-        });
-      } catch (error) {
-        res.status(400).json({
-          status: "fail",
-          error,
-        });
-      }
-    };
+  try {
+    const course = await Course.findById({ _id: req.params.id });
+    res.status(200).render("course", {
+      course,
+      page_name: "courses",
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      error,
+    });
+  }
+};
