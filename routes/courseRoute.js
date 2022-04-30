@@ -7,6 +7,7 @@ const router = express.Router();
 router.route("/").post(roleMiddleware(["teacher","admin"]) ,courseController.createCourse); // http://localhost:3000/courses
 router.route("/").get(courseController.getAllCourses);
 router.route("/:slug").get(courseController.getCourse); // http://localhost:3000/courses/html-dersleri gibi bir link
+router.route("/enroll").post(courseController.enrollCourse);
 
 //örnek
 router.route("/yeni").post(courseController.createCourse); // http://localhost:3000/courses/yeni
