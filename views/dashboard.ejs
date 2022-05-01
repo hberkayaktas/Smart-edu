@@ -20,10 +20,13 @@
 		<%- include('partials/_navigation') -%>
 			<!-- End header -->
 			<% if(user.role==='student'){ %>
-				<%- include('student-dashboard') -%>	
+				<%- include('dashboard-student') -%>	
 			<% } %>
 			<% if(user.role==='teacher'){ %>
-				<%- include('teacher-dashboard') -%>	
+				<%- include('dashboard-teacher') -%>	
+			<% } %>
+			<% if(user.role==='admin'){ %>
+				<%- include('dashboard-admin') -%>	
 			<% } %>
 
 
