@@ -33,18 +33,23 @@
 
                   </div><!-- end col -->
             </div><!-- end row -->
-            <div class="row mt-5">
                   <% if (flashMessages) { %>
                         <% if (flashMessages.success) { %>
                             <div class="alert alert-success">
                                 <%= flashMessages.success %>
                             </div>
+                            
                         <% }else if (flashMessages.error) { %>
                             <div class="alert alert-danger">
                                 <%= flashMessages.error %>
                             </div>
                         <% } %>
-                    <% } %>
+                  <% } %>
+
+            <div class="row mt-5">
+
+                 
+                  <h2>Users</h2>
                   <table class="table">
                         <thead>
                           <tr>
@@ -69,6 +74,96 @@
                       <% } %>
                         </tbody>
                        </table>
+           
+            </div><!-- end row -->
+
+            <div class="row mt-5">
+
+                  <h2>Categories</h2>
+                  <table class="table">
+                        <thead>
+                          <tr>
+                          <th scope="col">ID#</th>
+                          <th scope="col">Name</th>
+                          <th scope="col">Delete</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                      <% for (let i=0; i< categories.length; i++) { %>
+                          <tr>
+                          <th scope="row"><%=categories[i]._id %></th>
+                          <td><%=categories[i].name %></td>
+                          <td><a href="/categories/<%= categories[i]._id %>?_method=DELETE" 
+                            onclick="return confirm('ARE YOU SURE')"
+                            class="btn btn-danger rounded-0 text-white"><span>DELETE</span></a></td>
+                          </tr>
+                      <% } %>
+                        </tbody>
+                        <tfoot>
+                              <form id="contactform" class="" action="/categories" name="contactform" method="POST">
+                              <tr>
+                                    <td></td>
+                                    <td><input type="text" name="name"  class="form-control" placeholder="Category name"></td>
+                                    <td><button class="btn btn-primary">Add</button></td>
+                              </tr>
+                              </form>
+                        </tfoot>
+                      </table>
+           
+            </div><!-- end row -->
+
+
+            <div class="row mt-5">
+
+                  <h2>Courses</h2>
+                  <table class="table">
+                        <thead>
+                          <tr>
+                          <th scope="col">ID#</th>
+                          <th scope="col">Name</th>
+                          <th scope="col">Description</th>
+                          <th scope="col">Category</th>
+                          <th scope="col">Update</th>
+                          <th scope="col">Delete</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                      <% for (let i=0; i< AllCourses.length; i++) { %>
+                          <tr>
+                        <form method="POST" action="/courses/<%= AllCourses[i].slug %>?_method=PUT" >
+                          <th scope="row"><%=AllCourses[i].category %></th>
+                          <td><input type="text" name="name" value="<%=AllCourses[i].name %>" class="form-control"  placeholder="Course Name"></td>
+                          <td><textarea rows="8" name="description" class="form-control"
+                              placeholder="Course Description" required><%= AllCourses[i].description %></textarea></td>
+                        <td> 
+                              <select class="form-control" name="category">
+                                    <% for (let s=0; s< categories.length; s++) { %>
+                                          <%
+                                                a = AllCourses[i].category.toString();
+                                                b = categories[s]._id.toString();
+                                          %>
+                                          <% if( a == b ) {  %>
+                                                <option value="<%= categories[s]._id %>" selected><%= categories[s].name %></option>
+                                          <% } else { %>
+                                                <option value="<%= categories[s]._id %>"  ><%= categories[s].name %></option>
+                                          <% } %>
+                                    <% } %>	
+                              </select>
+                        </td>
+                        <td>
+                              <button type="submit" class="btn btn-warning">
+                                    Submit
+                              </button>
+                        </td>
+                        </form>
+                        
+                          <td><a href="/courses/<%= AllCourses[i].slug %>?_method=DELETE"
+                              onclick="return confirm('are you sure')" class="btn btn-danger rounded-0 text-white">Delete</a></td>
+                          </tr>
+                      <% } %>
+                        </tbody>
+                       
+                      </table>
            
             </div><!-- end row -->
       </div><!-- end container -->
